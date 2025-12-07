@@ -1,0 +1,116 @@
+.perfil-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.perfil-card {
+  width: 100%;
+  max-width: 700px;
+  overflow: hidden;
+}
+
+.perfil-header {
+  background: linear-gradient(135deg, #3f51b5 0%, #7986cb 100%);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  color: white;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .avatar-big {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid rgba(255,255,255,0.5);
+    overflow: hidden;
+    background: white;
+    flex-shrink: 0;
+
+    .img-fit {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .header-info {
+    h1 { margin: 0 0 10px 0; font-size: 2rem; font-weight: 700; }
+  }
+}
+
+.content-grid {
+  padding: 30px;
+  display: grid;
+  gap: 30px;
+}
+
+.section {
+  h3 { 
+    color: #555; 
+    border-bottom: 1px solid #eee; 
+    padding-bottom: 10px; 
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    mat-icon { color: #3f51b5; }
+  }
+  
+  p { margin: 8px 0; font-size: 1rem; color: #444; }
+}
+
+.galeria .fotos-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  .thumb {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: transform 0.2s;
+    
+    &:hover { transform: scale(1.05); }
+  }
+}
+
+.horarios {
+  .flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    h3 { margin: 0; border: none; }
+  }
+
+  .horarios-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    
+    .horario-item {
+      background: #e3f2fd;
+      padding: 8px 16px;
+      border-radius: 20px;
+      color: #1565c0;
+      font-weight: 500;
+      font-size: 0.9rem;
+      
+      .dia { font-weight: bold; margin-right: 5px; }
+    }
+  }
+}
+
+.text-muted { color: #999; font-style: italic; }
+
+.fade-in { animation: fadeIn 0.5s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }

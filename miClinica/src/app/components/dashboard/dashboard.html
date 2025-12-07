@@ -38,17 +38,17 @@
         <mat-icon matListItemIcon>calendar_month</mat-icon>
         <span matListItemTitle>Mis Turnos</span>
       </a>
-      <a mat-list-item *ngIf="perfil()?.rol === 'paciente'">
+      <a mat-list-item *ngIf="perfil()?.rol === 'paciente'" routerLink="/solicitar-turno">
         <mat-icon matListItemIcon>add_circle_outline</mat-icon>
         <span matListItemTitle>Solicitar Turno</span>
       </a>
 
       <!-- Opciones Especialista -->
-      <a mat-list-item *ngIf="esEspecialista()">
+      <a mat-list-item *ngIf="esEspecialista()" >
         <mat-icon matListItemIcon>assignment_ind</mat-icon>
         <span matListItemTitle>Mis Pacientes</span>
       </a>
-      <a mat-list-item *ngIf="esEspecialista()">
+      <a mat-list-item *ngIf="esEspecialista()" routerLink="/mis-horarios">
         <mat-icon matListItemIcon>schedule</mat-icon>
         <span matListItemTitle>Mi Agenda</span>
       </a>
@@ -87,7 +87,7 @@
       </button>
 
       <!-- Menú Usuario -->
-      <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu-btn">
+      <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu-btn" routerLink="/mi-perfil">
         <span>Mi Cuenta</span>
         <mat-icon>arrow_drop_down</mat-icon>
       </button>

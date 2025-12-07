@@ -1,0 +1,78 @@
+<div class="perfil-container fade-in">
+  
+  <mat-card class="perfil-card" *ngIf="perfil">
+    
+    <!-- CABECERA CON FOTO -->
+    <div class="perfil-header">
+      <div class="avatar-big">
+        <!-- Usamos foto_url o fallback -->
+        <img [src]="perfil.foto_url || 'assets/default-user.png'" 
+             class="img-fit"
+             onerror="this.src='https://ui-avatars.com/api/?size=200&name=' + this.alt"
+             [alt]="perfil.nombre">
+      </div>
+      
+      <div class="header-info">
+        <h1>{{ perfil.nombre }} {{ perfil.apellido }}</h1>
+        <mat-chip-set>
+          <mat-chip color="primary" selected>{{ perfil.rol | uppercase }}</mat-chip>
+          <mat-chip *ngIf="esEspecialista()" color="accent" selected>{{ perfil.especialidad }}</mat-chip>
+        </mat-chip-set>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content class="content-grid">
+      
+      <!-- DATOS PERSONALES -->
+      <div class="section datos">
+        <h3><mat-icon>badge</mat-icon> Datos Personales</h3>
+        <p><strong>DNI:</strong> {{ perfil.dni }}</p>
+        <p><strong>Edad:</strong> {{ perfil.edad }} años</p>
+        <p><strong>Email:</strong> {{ perfil.email }}</p>
+        
+        <p *ngIf="esPaciente()">
+          <strong>Obra Social:</strong> {{ perfil.obra_social || 'Particular' }}
+        </p>
+      </div>
+
+      <!-- GALERÍA DE IMÁGENES (Si subió más de una) -->
+      <div class="section galeria" *ngIf="perfil.imagenes && perfil.imagenes.length > 0">
+        <h3><mat-icon>image</mat-icon> Galería</h3>
+        <div class="fotos-row">
+          <img *ngFor="let img of perfil.imagenes" [src]="img" class="thumb">
+        </div>
+      </div>
+
+      <!-- SECCIÓN ESPECIALISTA (Horarios) -->
+      <div class="section horarios" *ngIf="esEspecialista()">
+        <div class="flex-between">
+          <h3><mat-icon>schedule</mat-icon> Mis Horarios</h3>
+          <button mat-stroked-button color="primary" routerLink="/mis-horarios">
+            <mat-icon>edit</mat-icon> EDITAR
+          </button>
+        </div>
+        
+        <div class="horarios-list" *ngIf="horarios.length > 0; else noHorarios">
+          <div *ngFor="let h of horarios" class="horario-item">
+            <span class="dia">{{ h.dia }}</span>
+            <span class="hora">{{ h.hora_inicio }}hs - {{ h.hora_fin }}hs</span>
+          </div>
+        </div>
+        <ng-template #noHorarios>
+          <p class="text-muted">No tienes horarios definidos.</p>
+        </ng-template>
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-button color="warn" (click)="logout()">
+        <mat-icon>logout</mat-icon> CERRAR SESIÓN
+      </button>
+    </mat-card-actions>
+
+  </mat-card>
+
+</div>

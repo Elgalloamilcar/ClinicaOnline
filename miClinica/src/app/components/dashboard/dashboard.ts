@@ -1,6 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SupabaseService } from '../../services/supabase';
 
 // --- ANGULAR MATERIAL IMPORTS ---
@@ -19,7 +19,7 @@ import { MatBadgeModule } from '@angular/material/badge';
   imports: [
     CommonModule,
     RouterLink,
-    RouterOutlet, // Por si quieres rutas hijas a futuro
+    //RouterOutlet, // Por si quieres rutas hijas a futuro
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,

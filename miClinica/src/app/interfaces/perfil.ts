@@ -11,6 +11,8 @@ export interface Perfil {
   rol: TipoUsuario;
   email: string;
   imagenes?: string []; 
+  foto_url?: string;
+
   
   obra_social: string;
 

@@ -1,0 +1,121 @@
+.turno-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+  h2 { margin: 0; color: #3f51b5; font-weight: 700; }
+}
+
+.step-title {
+  color: #555;
+  border-left: 4px solid #ff4081;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
+// Grid de Tarjetas (Especialidad / Médico)
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+
+  .option-card {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    text-align: center;
+    transition: all 0.3s;
+
+    &:hover {
+      transform: translateY(-5px);
+      background-color: #f5f5f5;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    .icon-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      
+      mat-icon { font-size: 30px; width: 30px; height: 30px; }
+      &.blue { background: #e3f2fd; color: #1565c0; }
+    }
+
+    .avatar-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border: 3px solid #e3f2fd;
+    }
+
+    h3 { margin: 0; font-weight: 700; font-size: 1.1rem; }
+    p { margin: 0; color: #666; font-size: 0.9rem; }
+  }
+}
+
+// Listado de Fechas
+.dia-block {
+  margin-bottom: 20px;
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+
+  .dia-header {
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+  }
+
+  .turnos-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .time-btn {
+      min-width: 80px;
+      color: #3f51b5;
+      border-color: #3f51b5;
+      
+      &:hover {
+        background-color: #3f51b5;
+        color: white;
+      }
+    }
+  }
+}
+
+.empty-msg {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+  
+  mat-icon { font-size: 48px; width: 48px; height: 48px; margin-bottom: 10px; }
+  p { font-size: 1.1rem; }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

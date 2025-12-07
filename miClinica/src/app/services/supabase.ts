@@ -161,4 +161,53 @@ export class SupabaseService {
   async agregarEspecialidad(nombre: string) {
     return this.supabase.from('especialidades').insert({ nombre }).select();
   }
+  // --- MÉTODOS PARA TURNOS (SPRINT 2) ---
+
+  // Obtener usuarios que sean especialistas (y opcionalmente de una especialidad)
+  async getEspecialistas(especialidad?: string) {
+    let query = this.supabase
+      .from('perfiles')
+      .select('*')
+      .eq('rol', 'especialista')
+      .eq('cuenta_habilitada', true); // Solo los aprobados
+
+    if (especialidad) {
+      // Nota: Si 'especialidad' en BD es un string único, usamos eq. 
+      // Si cambiaste a array, usarías .contains. Asumo string simple por ahora.
+      query = query.eq('especialidad', especialidad);
+    }
+
+    return query;
+  }
+
+  // Traer los horarios de trabajo de un médico
+  async getHorariosEspecialista(uid: string) {
+    return this.supabase
+      .from('horarios_especialistas')
+      .select('*')
+      .eq('especialista_id', uid);
+  }
+
+  // Traer los turnos YA ocupados de un médico en una fecha futura
+  async getTurnosOcupados(uid: string) {
+    const hoy = new Date().toISOString();
+    return this.supabase
+      .from('turnos')
+      .select('fecha_hora')
+      .eq('especialista_id', uid)
+      .gt('fecha_hora', hoy); // Solo futuros
+  }
+
+  // Traer todos los pacientes (Solo para uso del Admin)
+  async getPacientes() {
+    return this.supabase
+      .from('perfiles')
+      .select('*')
+      .eq('rol', 'paciente');
+  }
+
+  // Guardar el nuevo turno
+  async crearTurno(turno: any) {
+    return this.supabase.from('turnos').insert(turno);
+  }
 }

@@ -1,0 +1,20 @@
+<div class="captcha-container">
+  
+  <div class="captcha-display">
+    <!-- El código tachado para que parezca captcha -->
+    <span class="code-text">{{ code }}</span>
+    
+    <button mat-icon-button (click)="generateCode()" type="button" title="Generar otro código">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+
+  <mat-form-field appearance="outline" class="captcha-input">
+    <mat-label>Repita el código</mat-label>
+    <input matInput [(ngModel)]="userInput" (keyup)="validate()" placeholder="Ingrese caracteres" autocomplete="off">
+    
+    <!-- Icono de éxito si está bien -->
+    <mat-icon matSuffix *ngIf="isValid" class="success-icon">check_circle</mat-icon>
+  </mat-form-field>
+
+</div>

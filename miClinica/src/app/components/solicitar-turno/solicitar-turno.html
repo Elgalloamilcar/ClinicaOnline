@@ -1,0 +1,88 @@
+<div class="turno-container fade-in">
+  
+  <div class="header">
+    <button mat-icon-button (click)="reset()" *ngIf="pasoActual > 0">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2>Solicitar Nuevo Turno</h2>
+  </div>
+
+  <!-- PASO 0: ELEGIR ESPECIALIDAD -->
+  <div *ngIf="pasoActual === 0">
+    <h3 class="step-title">1. Seleccione Especialidad</h3>
+    <div class="grid-cards">
+      <mat-card *ngFor="let esp of especialidades" 
+                class="option-card" 
+                (click)="seleccionarEspecialidad(esp)">
+        <div class="icon-circle blue"><mat-icon>local_hospital</mat-icon></div>
+        <h3>{{ esp }}</h3>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- PASO 1: ELEGIR MÉDICO -->
+  <div *ngIf="pasoActual === 1">
+    <h3 class="step-title">2. Elija Especialista en {{ especialidadSeleccionada }}</h3>
+    
+    <div *ngIf="especialistasFiltrados.length === 0" class="empty-msg">
+      <mat-icon>person_off</mat-icon>
+      <p>No hay especialistas disponibles para esta área.</p>
+    </div>
+
+    <div class="grid-cards">
+      <mat-card *ngFor="let med of especialistasFiltrados" 
+                class="option-card" 
+                (click)="seleccionarEspecialista(med)">
+        
+        <!-- Foto circular -->
+        <img [src]="med.foto_url || 'assets/default-user.png'" 
+             class="avatar-img" 
+             onerror="this.src='https://ui-avatars.com/api/?name='+this.alt">
+        
+        <h3>Dr/a. {{ med.apellido }}</h3>
+        <p>{{ med.nombre }}</p>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- PASO 2: ELEGIR FECHA (Sin Datepicker) -->
+  <div *ngIf="pasoActual === 2">
+    <h3 class="step-title">3. Seleccione Fecha y Hora</h3>
+    
+    <div *ngIf="diasDisponibles.length === 0" class="empty-msg">
+      <mat-icon>event_busy</mat-icon>
+      <p>El especialista no tiene turnos disponibles en los próximos 15 días.</p>
+    </div>
+
+    <div class="fechas-list">
+      <!-- Iteramos los días que tienen huecos -->
+      <div *ngFor="let dia of diasDisponibles" class="dia-block">
+        <div class="dia-header">
+          {{ dia.fecha | date:'EEEE d/MM':'':'es-AR' | titlecase }}
+        </div>
+        
+        <div class="turnos-grid">
+          <button mat-stroked-button 
+                  *ngFor="let turno of dia.turnos" 
+                  (click)="seleccionarTurno(turno)"
+                  class="time-btn">
+            {{ turno | date:'HH:mm' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASO 3: (ADMIN) ELEGIR PACIENTE -->
+  <div *ngIf="pasoActual === 3">
+    <h3 class="step-title">4. ¿Para qué paciente es el turno?</h3>
+    <mat-selection-list [multiple]="false">
+      <mat-list-option *ngFor="let pac of pacientes" (click)="seleccionarPaciente(pac)">
+        <mat-icon matListItemIcon>person</mat-icon>
+        <div matListItemTitle>{{ pac.apellido }}, {{ pac.nombre }}</div>
+        <div matListItemLine>DNI: {{ pac.dni }}</div>
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+
+</div>

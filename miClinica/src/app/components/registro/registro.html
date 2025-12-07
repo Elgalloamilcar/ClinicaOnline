@@ -108,6 +108,8 @@
             <input #fileInput2 type="file" (change)="onFileSelected($event, 2)" hidden accept="image/*">
           </div>
         </div>
+        <app-captcha (captchaStatus)="resolverCaptcha($event)"></app-captcha>
+
 
         <button mat-raised-button color="primary" type="submit" [disabled]="loading || form.invalid" class="submit-btn">
           REGISTRARSE

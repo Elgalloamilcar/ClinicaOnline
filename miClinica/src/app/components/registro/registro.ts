@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { SupabaseService } from '../../services/supabase';
 import { MatDividerModule } from '@angular/material/divider';
 import {SpinnerService} from '../../services/spinner';
+import {Captcha} from '../../components/captcha/captcha';
 
 
 // Angular Material
@@ -26,6 +27,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatCardModule, MatInputModule, MatButtonModule,
     MatIconModule, MatRadioModule, MatSelectModule,
     MatProgressBarModule, MatSnackBarModule, MatDividerModule,
+    Captcha,
   ],
   templateUrl: './registro.html',
   styleUrl: './registro.scss'
@@ -37,6 +39,8 @@ export class Registro implements OnInit {
   private snackBar = inject(MatSnackBar);
   private spinner = inject(SpinnerService);
 
+
+
   form: FormGroup;
   hidePassword = true;
   loading = false;
@@ -46,6 +50,7 @@ export class Registro implements OnInit {
   // Archivos seleccionados
   imagen1: File | null = null;
   imagen2: File | null = null; // Solo para pacientes
+  captchaValido: boolean= false;
 
   constructor() {
     this.form = this.fb.group({
@@ -76,6 +81,10 @@ export class Registro implements OnInit {
     
     // Iniciar validaciones por defecto
     this.actualizarValidaciones('paciente');
+  }
+    // <--- 3. FUNCIÓN PARA ESCUCHAR AL CAPTCHA
+  resolverCaptcha(esValido: boolean) {
+    this.captchaValido = esValido;
   }
 
   actualizarValidaciones(rol: string) {
@@ -108,6 +117,11 @@ export class Registro implements OnInit {
 
   async onSubmit() {
     if (this.form.invalid) return;
+     // <--- 4. VALIDACIÓN DE CAPTCHA ANTES DE ENVIAR
+    if (!this.captchaValido) {
+      this.mostrarError('Debes completar el Captcha correctamente.');
+      return;
+    }
     
     // Validar imágenes requeridas manualmente
     if (!this.imagen1) {
