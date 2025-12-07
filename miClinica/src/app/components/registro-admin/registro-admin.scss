@@ -1,0 +1,51 @@
+.admin-registro-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  background-color: #eee;
+  min-height: 100vh;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    h2 { margin: 0; color: #d32f2f; } // Color rojo para indicar zona admin
+  }
+}
+
+.role-selector {
+  background: #ffebee;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  label { font-weight: bold; display: block; margin-bottom: 8px; color: #c62828; }
+  mat-radio-group { display: flex; gap: 20px; }
+}
+
+.grid-inputs {
+  display: flex;
+  gap: 16px;
+  mat-form-field { flex: 1; }
+}
+
+.full-width { width: 100%; }
+
+.file-upload {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+  .file-name { font-size: 0.8rem; color: #666; font-style: italic; }
+}
+
+.actions {
+  margin-top: 20px;
+  button { width: 100%; padding: 6px; font-size: 1.1rem; }
+}

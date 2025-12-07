@@ -1,0 +1,84 @@
+<div class="admin-registro-container">
+  <mat-card class="form-card">
+    <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    
+    <div class="card-header">
+      <h2>Alta de Usuario</h2>
+      <button mat-icon-button routerLink="/usuarios"><mat-icon>close</mat-icon></button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      
+      <!-- Selector de Rol IMPORTANTE -->
+      <div class="role-selector">
+        <label>Tipo de Usuario:</label>
+        <mat-radio-group formControlName="rol" color="warn">
+          <mat-radio-button value="administrador">Administrador</mat-radio-button>
+          <mat-radio-button value="especialista">Especialista</mat-radio-button>
+          <mat-radio-button value="paciente">Paciente</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="grid-inputs">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Apellido</mat-label>
+          <input matInput formControlName="apellido">
+        </mat-form-field>
+      </div>
+
+      <div class="grid-inputs">
+        <mat-form-field appearance="outline">
+          <mat-label>DNI</mat-label>
+          <input matInput type="number" formControlName="dni">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Edad</mat-label>
+          <input matInput type="number" formControlName="edad">
+        </mat-form-field>
+      </div>
+
+      <!-- Campos Dinámicos -->
+      <mat-form-field *ngIf="form.get('rol')?.value === 'paciente'" appearance="outline" class="full-width">
+        <mat-label>Obra Social</mat-label>
+        <input matInput formControlName="obraSocial">
+      </mat-form-field>
+
+      <mat-form-field *ngIf="form.get('rol')?.value === 'especialista'" appearance="outline" class="full-width">
+        <mat-label>Especialidad</mat-label>
+        <mat-select formControlName="especialidad">
+          <mat-option *ngFor="let esp of especialidades" [value]="esp.nombre">{{esp.nombre}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Credenciales -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password">
+      </mat-form-field>
+
+      <!-- Imagen -->
+      <div class="file-upload">
+        <button type="button" mat-stroked-button color="primary" (click)="fileInput.click()">
+          <mat-icon>upload</mat-icon> Subir Foto de Perfil
+        </button>
+        <input #fileInput type="file" hidden (change)="onFileSelected($event)" accept="image/*">
+        <span *ngIf="imagen1" class="file-name">{{ imagen1.name }}</span>
+      </div>
+
+      <div class="actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="loading || form.invalid">
+          GUARDAR USUARIO
+        </button>
+      </div>
+
+    </form>
+  </mat-card>
+</div>

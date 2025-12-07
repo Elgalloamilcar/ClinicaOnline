@@ -1,0 +1,200 @@
+<mat-sidenav-container class="dashboard-container">
+  
+  <!-- SIDEBAR (Navegación) -->
+  <mat-sidenav #sidenav mode="side" opened class="app-sidenav">
+    
+    <!-- Header del Sidebar -->
+    <div class="sidenav-header">
+      <div class="logo">
+        <mat-icon>local_hospital</mat-icon>
+        <span>Clínica<strong>Online</strong></span>
+      </div>
+    </div>
+
+    <!-- Perfil Resumido -->
+    <div class="user-profile-widget">
+      <div class="avatar-circle">
+        {{ perfil()?.nombre?.charAt(0) }}{{ perfil()?.apellido?.charAt(0) }}
+      </div>
+      <div class="user-info">
+        <p class="name">{{ perfil()?.nombre }} {{ perfil()?.apellido }}</p>
+        <p class="role">{{ perfil()?.rol }}</p>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- Menú de Navegación -->
+    <mat-nav-list>
+      <h3 mat-subheader>Menú Principal</h3>
+      
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <span matListItemTitle>Inicio</span>
+      </a>
+
+      <!-- Opciones Paciente -->
+      <a mat-list-item *ngIf="perfil()?.rol === 'paciente'">
+        <mat-icon matListItemIcon>calendar_month</mat-icon>
+        <span matListItemTitle>Mis Turnos</span>
+      </a>
+      <a mat-list-item *ngIf="perfil()?.rol === 'paciente'">
+        <mat-icon matListItemIcon>add_circle_outline</mat-icon>
+        <span matListItemTitle>Solicitar Turno</span>
+      </a>
+
+      <!-- Opciones Especialista -->
+      <a mat-list-item *ngIf="esEspecialista()">
+        <mat-icon matListItemIcon>assignment_ind</mat-icon>
+        <span matListItemTitle>Mis Pacientes</span>
+      </a>
+      <a mat-list-item *ngIf="esEspecialista()">
+        <mat-icon matListItemIcon>schedule</mat-icon>
+        <span matListItemTitle>Mi Agenda</span>
+      </a>
+
+      <!-- Opciones Admin -->
+      <ng-container *ngIf="esAdmin()">
+        <mat-divider></mat-divider>
+        <h3 mat-subheader>Administración</h3>
+        
+        <a mat-list-item routerLink="/usuarios" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>group</mat-icon>
+          <span matListItemTitle>Usuarios</span>
+        </a>
+        <a mat-list-item>
+          <mat-icon matListItemIcon>meeting_room</mat-icon>
+          <span matListItemTitle>Especialidades</span>
+        </a>
+      </ng-container>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <mat-sidenav-content class="main-content">
+    
+    <!-- Toolbar Superior -->
+    <mat-toolbar class="app-toolbar">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      
+      <!-- Botón Notificaciones -->
+      <button mat-icon-button class="notification-btn">
+        <mat-icon matBadge="3" matBadgeColor="warn">notifications</mat-icon>
+      </button>
+
+      <!-- Menú Usuario -->
+      <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu-btn">
+        <span>Mi Cuenta</span>
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>person</mat-icon> Perfil
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon> Cerrar Sesión
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <!-- Área de Contenido Dinámico -->
+    <div class="content-wrapper p-6">
+      
+      <!-- VISTA PACIENTE -->
+      <div *ngIf="perfil()?.rol === 'paciente'" class="fade-in">
+        <div class="welcome-banner blue-gradient">
+          <div class="text">
+            <h1>Hola, {{ perfil()?.nombre }} 👋</h1>
+            <p>¿Cómo te sientes hoy? Reserva una cita con nuestros especialistas.</p>
+          </div>
+          <button mat-raised-button class="action-btn">
+            <mat-icon>add</mat-icon> NUEVO TURNO
+          </button>
+        </div>
+
+        <h2 class="section-heading">Próximos Turnos</h2>
+        <mat-card class="empty-state">
+          <mat-icon class="huge-icon">event_busy</mat-icon>
+          <h3>No tienes turnos programados</h3>
+          <p>Tus citas médicas confirmadas aparecerán aquí.</p>
+        </mat-card>
+      </div>
+
+      <!-- VISTA ESPECIALISTA -->
+      <div *ngIf="esEspecialista()" class="fade-in">
+        <h1 class="page-title">Panel de Especialista</h1>
+        
+        <div class="stats-grid">
+          <mat-card class="stat-card">
+            <div class="icon-box purple"><mat-icon>today</mat-icon></div>
+            <div class="stat-info">
+              <span class="label">Turnos Hoy</span>
+              <span class="value">0</span>
+            </div>
+          </mat-card>
+          
+          <mat-card class="stat-card">
+            <div class="icon-box orange"><mat-icon>pending_actions</mat-icon></div>
+            <div class="stat-info">
+              <span class="label">Pendientes</span>
+              <span class="value">0</span>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- VISTA ADMINISTRADOR -->
+      <div *ngIf="esAdmin()" class="fade-in">
+        <h1 class="page-title">Dashboard Administrativo</h1>
+        
+        <div class="stats-grid">
+          <mat-card class="stat-card">
+            <div class="icon-box blue"><mat-icon>group</mat-icon></div>
+            <div class="stat-info">
+              <span class="label">Usuarios</span>
+              <span class="value">120</span>
+            </div>
+          </mat-card>
+
+          <mat-card class="stat-card">
+            <div class="icon-box green"><mat-icon>check_circle</mat-icon></div>
+            <div class="stat-info">
+              <span class="label">Turnos Finalizados</span>
+              <span class="value">850</span>
+            </div>
+          </mat-card>
+          
+          <mat-card class="stat-card">
+            <div class="icon-box red"><mat-icon>domain</mat-icon></div>
+            <div class="stat-info">
+              <span class="label">Consultorios</span>
+              <span class="value">6</span>
+            </div>
+          </mat-card>
+        </div>
+        
+        <!-- Acciones Rápidas -->
+        <h2 class="section-heading mt-6">Acciones Rápidas</h2>
+        <div class="actions-grid">
+            <button mat-stroked-button class="quick-action">
+                <mat-icon class="text-blue-600">person_add</mat-icon>
+                Registrar Admin
+            </button>
+            <button mat-stroked-button class="quick-action">
+                <mat-icon class="text-green-600">add_business</mat-icon>
+                Nuevo Consultorio
+            </button>
+            <button mat-stroked-button class="quick-action">
+                <mat-icon class="text-purple-600">assignment</mat-icon>
+                Ver Reportes
+            </button>
+        </div>
+      </div>
+
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

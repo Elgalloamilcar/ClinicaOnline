@@ -1,0 +1,47 @@
+.usuarios-container {
+  padding: 20px;
+  
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    
+    h2 { margin: 0; color: #3f51b5; font-weight: 700; }
+  }
+
+  .table-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  table {
+    width: 100%;
+    
+    .user-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+
+      .avatar-mini {
+        width: 36px;
+        height: 36px;
+        background: #e0e0e0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #555;
+      }
+      
+      .text-data {
+        display: flex;
+        flex-direction: column;
+        .name { font-weight: 500; }
+        .dni { font-size: 0.75rem; color: #888; }
+      }
+    }
+  }
+}

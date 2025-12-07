@@ -1,0 +1,96 @@
+.registro-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+.registro-card {
+  width: 100%;
+  max-width: 600px;
+  
+  mat-card-header {
+    margin-bottom: 20px;
+    mat-card-title { font-size: 1.5rem; color: #3f51b5; }
+  }
+}
+
+.registro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row-inputs {
+  display: flex;
+  gap: 16px;
+  @media (max-width: 500px) { flex-direction: column; gap: 0; }
+  
+  .half { flex: 1; width: 100%; }
+}
+
+.full-width { width: 100%; }
+
+.rol-selection {
+  background: #e8eaf6;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  
+  .rol-group {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+.specific-section {
+  background: #f9f9f9;
+  padding: 15px;
+  border-left: 4px solid #3f51b5;
+  margin: 10px 0;
+  border-radius: 4px;
+
+  .section-title {
+    margin: 0 0 10px 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+  }
+}
+
+.file-upload-section {
+  border: 1px dashed #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+
+  .upload-label { margin: 0 0 10px 0; font-weight: 600; font-size: 0.9rem; }
+  
+  .upload-btn-wrapper {
+    margin-bottom: 8px;
+    button { width: 100%; text-align: left; }
+  }
+}
+
+.submit-btn {
+  padding: 8px 0;
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+mat-card-footer {
+    text-align: center;
+    padding: 20px;
+    a { color: #3f51b5; text-decoration: none; font-weight: bold; }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

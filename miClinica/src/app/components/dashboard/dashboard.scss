@@ -1,0 +1,234 @@
+$sidebar-width: 260px;
+$primary-color: #3f51b5;
+$bg-color: #f5f7fa;
+
+.dashboard-container {
+  height: 100vh;
+  background-color: $bg-color;
+}
+
+// --- SIDEBAR ---
+.app-sidenav {
+  width: $sidebar-width;
+  background: white;
+  border-right: 1px solid rgba(0,0,0,0.05);
+
+  .sidenav-header {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.2rem;
+      color: #333;
+      
+      mat-icon { color: $primary-color; }
+    }
+  }
+
+  .user-profile-widget {
+    padding: 24px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .avatar-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #e3f2fd;
+      color: $primary-color;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .user-info {
+      overflow: hidden;
+      .name { font-weight: 600; font-size: 0.95rem; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .role { font-size: 0.75rem; color: #666; text-transform: uppercase; margin: 0; }
+    }
+  }
+
+  // Estilos de navegación
+  .active-link {
+    background-color: rgba($primary-color, 0.08);
+    color: $primary-color;
+    border-right: 3px solid $primary-color;
+
+    mat-icon { color: $primary-color; }
+  }
+}
+
+// --- MAIN CONTENT ---
+.main-content {
+  background-color: $bg-color;
+}
+
+.app-toolbar {
+  background: white;
+  color: #333;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  
+  .spacer { flex: 1; }
+  
+  .user-menu-btn {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// --- ESTILOS COMUNES ---
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 24px;
+}
+
+.section-heading {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #455a64;
+  margin: 32px 0 16px 0;
+}
+
+// --- BANNERS ---
+.welcome-banner {
+  border-radius: 16px;
+  padding: 32px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  box-shadow: 0 10px 20px rgba(63, 81, 181, 0.2);
+
+  &.blue-gradient {
+    background: linear-gradient(135deg, #3f51b5 0%, #5c6bc0 100%);
+  }
+
+  h1 { margin: 0 0 8px 0; font-size: 1.8rem; }
+  p { margin: 0; opacity: 0.9; }
+
+  .action-btn {
+    background: white;
+    color: $primary-color;
+    font-weight: 700;
+  }
+  
+  @media (max-width: 600px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+  }
+}
+
+// --- STATS CARDS ---
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+
+  .stat-card {
+    padding: 24px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.02);
+
+    .icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      mat-icon { font-size: 28px; width: 28px; height: 28px; }
+
+      &.purple { background: #f3e5f5; color: #8e24aa; }
+      &.orange { background: #fff3e0; color: #fb8c00; }
+      &.blue { background: #e3f2fd; color: #1e88e5; }
+      &.green { background: #e8f5e9; color: #43a047; }
+      &.red { background: #ffebee; color: #e53935; }
+    }
+
+    .stat-info {
+      display: flex;
+      flex-direction: column;
+      
+      .label { font-size: 0.85rem; color: #78909c; font-weight: 500; text-transform: uppercase; }
+      .value { font-size: 1.8rem; font-weight: 800; color: #263238; line-height: 1.2; }
+    }
+  }
+}
+
+// --- EMPTY STATES ---
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  border: 2px dashed #cfd8dc;
+  box-shadow: none !important;
+  background: transparent;
+
+  .huge-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: #b0bec5;
+    margin-bottom: 16px;
+  }
+  
+  h3 { margin: 0 0 8px 0; color: #546e7a; font-weight: 600; }
+  p { margin: 0; color: #90a4ae; }
+}
+
+// --- ACTIONS GRID ---
+.actions-grid {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    
+    .quick-action {
+        height: auto;
+        padding: 16px 24px;
+        border-color: #e0e0e0;
+        background: white;
+        
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+        
+        mat-icon {
+            margin: 0;
+            font-size: 24px;
+        }
+    }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

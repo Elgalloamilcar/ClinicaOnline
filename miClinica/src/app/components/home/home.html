@@ -1,0 +1,109 @@
+
+  
+  <!-- BARRA SUPERIOR (Solo visual para la home) -->
+  <header class="top-nav">
+    <div class="logo">
+      <mat-icon class="logo-icon">local_hospital</mat-icon>
+      <span>Clínica<strong>Online</strong></span>
+    </div>
+    <button mat-stroked-button color="primary" routerLink="/login">
+      INICIAR SESIÓN
+    </button>
+  </header>
+
+  <!-- HERO SECTION: Mensaje Principal -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Tu salud, <br> nuestra <span class="highlight">prioridad</span>.</h1>
+      <p class="subtitle">
+        Accede a los mejores especialistas y gestiona tus turnos de manera rápida, segura y 100% online.
+      </p>
+      
+      <div class="cta-buttons">
+        <button mat-raised-button color="primary" routerLink="/registro" class="big-cta">
+          <mat-icon>person_add</mat-icon> CREAR CUENTA GRATIS
+        </button>
+      </div>
+    </div>
+    
+    <!-- Decoración visual (Círculos abstractos) -->
+    <div class="hero-decoration">
+      <div class="circle circle-1"></div>
+      <div class="circle circle-2"></div>
+    </div>
+  </section>
+
+  <!-- ACCESOS RÁPIDOS -->
+  <section class="quick-access-section">
+    <h2 class="section-title">¿Qué necesitas hoy?</h2>
+    
+    <div class="access-grid">
+      
+      <!-- Opción 1: Paciente -->
+      <mat-card class="access-card" matRipple routerLink="/login">
+        <div class="card-icon-bg blue">
+          <mat-icon>calendar_month</mat-icon>
+        </div>
+        <mat-card-header>
+          <mat-card-title>Solicitar Turno</mat-card-title>
+          <mat-card-subtitle>Pacientes</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Reserva tu cita con nuestros especialistas en pocos clics.</p>
+        </mat-card-content>
+        <div class="card-action">
+          <span>INGRESAR</span>
+          <mat-icon>arrow_forward</mat-icon>
+        </div>
+      </mat-card>
+
+      <!-- Opción 2: Especialista -->
+      <mat-card class="access-card" matRipple routerLink="/login">
+        <div class="card-icon-bg green">
+          <mat-icon>medical_services</mat-icon>
+        </div>
+        <mat-card-header>
+          <mat-card-title>Soy Especialista</mat-card-title>
+          <mat-card-subtitle>Profesionales</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Gestiona tu agenda, historias clínicas y pacientes.</p>
+        </mat-card-content>
+        <div class="card-action">
+          <span>ACCEDER</span>
+          <mat-icon>arrow_forward</mat-icon>
+        </div>
+      </mat-card>
+
+      <!-- Opción 3: Laboratorio -->
+      <mat-card class="access-card" matRipple routerLink="/login">
+        <div class="card-icon-bg purple">
+          <mat-icon>biotech</mat-icon>
+        </div>
+        <mat-card-header>
+          <mat-card-title>Resultados</mat-card-title>
+          <mat-card-subtitle>Laboratorio</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Consulta y descarga tus estudios médicos online.</p>
+        </mat-card-content>
+        <div class="card-action">
+          <span>CONSULTAR</span>
+          <mat-icon>arrow_forward</mat-icon>
+        </div>
+      </mat-card>
+
+    </div>
+  </section>
+
+  <!-- FOOTER SIMPLE -->
+  <footer class="home-footer">
+    <p>© 2024 Clínica Online. Todos los derechos reservados.</p>
+    <div class="horarios">
+      <mat-icon class="tiny-icon">schedule</mat-icon>
+      <span>Lunes a Viernes 8-19hs | Sábados 8-14hs</span>
+    </div>
+  </footer>
+
+
+
